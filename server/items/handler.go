@@ -9,16 +9,16 @@ import (
 	"github.com/vil-coyote-acme/dbd/storage"
 )
 
-type Handler struct {
+type SetHandler struct {
 	authenticator  security.HttpAuthenticator
 	itemRepository storage.ItemRepository
 }
 
-func NewHandler(authenticator security.HttpAuthenticator, itemRepository storage.ItemRepository) *Handler {
-	return &Handler{authenticator, itemRepository}
+func NewSetHandler(authenticator security.HttpAuthenticator, itemRepository storage.ItemRepository) *SetHandler {
+	return &SetHandler{authenticator, itemRepository}
 }
 
-func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h *SetHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// TODO: on POST, do ensure the item payload is complete
 	_, err := h.authenticator.LookupSession(r)
 	if err != nil {

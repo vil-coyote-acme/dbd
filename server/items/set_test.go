@@ -23,7 +23,7 @@ func TestNotAuthenticated(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	h := items.NewHandler(utils.AuthenticatorMock{ExpectedError: errors.New("some error")}, &utils.ItemRepositoryMock{})
+	h := items.NewSetHandler(utils.AuthenticatorMock{ExpectedError: errors.New("some error")}, &utils.ItemRepositoryMock{})
 
 	// when
 	h.ServeHTTP(rr, req)
@@ -45,7 +45,7 @@ func TestSuccess(t *testing.T) {
 
 	rr := httptest.NewRecorder()
 	itemRepository := &utils.ItemRepositoryMock{}
-	h := items.NewHandler(utils.AuthenticatorMock{}, itemRepository)
+	h := items.NewSetHandler(utils.AuthenticatorMock{}, itemRepository)
 
 	// when
 	h.ServeHTTP(rr, req)
